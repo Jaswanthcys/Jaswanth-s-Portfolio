@@ -1,0 +1,907 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#080b10" />
+
+    <meta
+      id="meta-description"
+      name="description"
+      content="Kai Mori — student web developer in Tokyo. A cinematic archive of immersive, modern and high-performance web experiences."
+    />
+
+    <meta
+      id="og-title"
+      property="og:title"
+      content="Kai Mori — Student Web Developer"
+    />
+
+    <meta
+      id="og-description"
+      property="og:description"
+      content="I build immersive, modern and high-performance web experiences."
+    />
+
+    <meta property="og:type" content="website" />
+
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="stylesheet" href="/styles/portfolio.css" />
+
+    <title>Jaswanth — Student Web Developer</title>
+
+    <script type="module" src="/scripts/app.js"></script>
+  </head>
+
+  <body>
+    <div class="scene-shell" aria-hidden="true">
+      <img class="scene-plate" id="scene-plate" alt="" />
+      <video
+        class="scene-video"
+        id="scene-video"
+        muted
+        autoplay
+        loop
+        playsinline
+      ></video>
+      <canvas id="scene-canvas"></canvas>
+      <div class="scene-vignette"></div>
+      <div class="scene-grain"></div>
+    </div>
+
+    <div
+      id="cinematic-intro"
+      data-testid="cinematic-intro"
+      class="intro-screen"
+    >
+      <div
+        id="enter-screen"
+        data-testid="enter-screen"
+        class="enter-screen"
+      >
+        <div class="intro-mark" aria-hidden="true">
+          <span data-initials>JM</span>
+          <i></i>
+        </div>
+
+        <p class="eyebrow intro-prompt">
+          PRESS TO ENTER <span class="prompt-dot"></span>
+        </p>
+
+        <button
+          id="enter-experience-button"
+          data-testid="enter-experience-button"
+          class="enter-button"
+          type="button"
+        >
+          <span>ENTER THE EXPERIENCE</span>
+          <span class="button-arrow" aria-hidden="true">↗</span>
+        </button>
+
+        <div class="joystick" aria-hidden="true">
+          <span class="joystick-base"></span>
+          <span class="joystick-stick"></span>
+          <span class="joystick-orbit"></span>
+        </div>
+
+        <p class="intro-footnote">
+          HEADPHONES OPTIONAL <span>—</span> SOUND BEGINS AFTER ENTRY
+        </p>
+      </div>
+
+      <div
+        id="loading-sequence"
+        data-testid="loading-sequence"
+        class="loading-sequence"
+        hidden
+      >
+        <p class="eyebrow">A MOMENT BEFORE THE ARCHIVE</p>
+
+        <div class="loading-meter-row">
+          <progress
+            id="loading-progress"
+            data-testid="loading-progress"
+            max="100"
+            value="0"
+            aria-label="Experience loading progress"
+          >
+            0%
+          </progress>
+
+          <span
+            id="loading-percent"
+            class="loading-percent"
+            aria-live="polite"
+          >
+            0%
+          </span>
+        </div>
+
+        <p
+          id="loading-caption"
+          class="loading-caption"
+          aria-live="polite"
+        >
+          THE NIGHT HOLDS ITS BREATH
+        </p>
+      </div>
+    </div>
+
+    <div
+      id="portfolio"
+      data-testid="portfolio"
+      class="portfolio"
+      hidden
+    >
+      <header class="site-header" id="site-header">
+        <a
+          class="brand-lockup"
+          id="brand-link"
+          data-testid="brand-link"
+          href="#hero-section"
+          aria-label="KM personal archive, back to the beginning"
+        >
+          <img class="brand-icon" alt="" />
+
+          <span class="brand-letters" data-initials>JM</span>
+
+          <span
+            class="brand-divider"
+            aria-hidden="true"
+          ></span>
+
+          <span
+            id="archive-label"
+            class="archive-label"
+          >
+            PERSONAL ARCHIVE
+          </span>
+        </a>
+
+        <nav
+          class="main-nav"
+          aria-label="Main navigation"
+        >
+          <a
+            id="nav-projects"
+            data-testid="nav-projects"
+            href="#projects-section"
+          >
+            PROJECTS
+          </a>
+
+          <a
+            id="nav-certificates"
+            data-testid="nav-certificates"
+            href="#certificates-section"
+          >
+            CERTIFICATES
+          </a>
+
+          <a
+            id="nav-profile"
+            data-testid="nav-profile"
+            href="#profile-section"
+          >
+            PROFILE
+          </a>
+
+          <a
+            id="nav-contact"
+            data-testid="nav-contact"
+            href="#contact-section"
+          >
+            CONTACT
+          </a>
+        </nav>
+
+        <div class="header-tools">
+          <time
+            id="tokyo-clock"
+            data-testid="tokyo-clock"
+            class="tokyo-clock"
+            aria-label="Current time in Tokyo"
+          >
+            TOKYO --:--
+          </time>
+
+          <button
+            id="audio-toggle"
+            data-testid="audio-toggle"
+            class="sound-toggle"
+            type="button"
+            aria-pressed="true"
+            aria-label="Turn sound off"
+          >
+            SOUND READY
+          </button>
+        </div>
+      </header>
+
+      <main id="main-content">
+        <section
+          id="hero-section"
+          data-testid="hero-section"
+          class="hero-section page-section"
+          aria-labelledby="hero-title"
+        >
+          <div class="hero-content">
+            <p class="eyebrow hero-kicker">
+              <span class="status-dot"></span>
+
+              <span id="hero-kicker-role">
+                STUDENT WEB DEVELOPER
+              </span>
+
+              <span class="eyebrow-separator">/</span>
+
+              <span id="hero-kicker-location">
+                CHIRALA, IND
+              </span>
+            </p>
+
+            <h1 id="hero-title">
+              <span id="hero-first-name">JASWANTH</span>
+              <br />
+              <span id="hero-last-name">MARELLA</span>
+            </h1>
+
+            <p
+              id="hero-role"
+              class="hero-role"
+            >
+              Student Web Developer
+            </p>
+
+            <p
+              id="hero-quote"
+              class="hero-quote"
+            >
+              “I build immersive, modern and high-performance web experiences.”
+            </p>
+
+            <div class="hero-actions">
+              <a
+                id="explore-work-button"
+                data-testid="explore-work-button"
+                class="hud-button"
+                href="#projects-section"
+              >
+                <span>EXPLORE MY WORK</span>
+                <span
+                  class="button-arrow"
+                  aria-hidden="true"
+                >
+                  →
+                </span>
+              </a>
+
+              <a
+                id="hero-contact-link"
+                data-testid="hero-contact-link"
+                class="hud-button hud-button-muted"
+                href="#contact-section"
+              >
+                <span>CONTACT ME</span>
+                <span
+                  class="button-arrow"
+                  aria-hidden="true"
+                >
+                  →
+                </span>
+              </a>
+
+              <a
+                id="resume-link"
+                data-testid="resume-link"
+                class="hero-resume-link"
+                href="/assets/resume/Marella-Jaswanth-Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open Kai Mori's résumé PDF in a new tab"
+              >
+                VIEW RESUME
+                <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+
+          <div
+            class="hero-hud"
+            aria-label="Developer status"
+          >
+            <div>
+              <span>LOCATION</span>
+              <strong id="hero-hud-location">
+                CHIRALA / IND
+              </strong>
+            </div>
+
+            <div>
+              <span>STATUS</span>
+
+              <strong>
+                <i class="status-dot"></i>
+
+                <span id="hero-hud-status">
+                  BUILDING
+                </span>
+              </strong>
+            </div>
+
+            <div>
+              <span>LEVEL</span>
+
+              <strong id="hero-hud-level">
+                STUDENT DEVELOPER
+              </strong>
+            </div>
+          </div>
+
+          <div
+            class="hero-scroll-cue"
+            aria-hidden="true"
+          >
+            <span></span>
+            SCROLL TO EXPLORE
+          </div>
+
+          <div
+            class="hero-coordinate"
+            aria-hidden="true"
+          >
+            35° 40' 41.2" N&nbsp; / &nbsp;139° 45' 50.4" E
+          </div>
+        </section>
+
+        <section
+          id="skills-section"
+          data-testid="skills-section"
+          class="page-section section-wrap skills-section"
+          aria-labelledby="skills-title"
+        >
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow section-index">
+                 <span>— LOADOUT</span>
+              </p>
+
+              <h2 id="skills-title">
+                TOOLS OF
+                <br />
+                <em>THE CRAFT</em>
+              </h2>
+            </div>
+
+            <p class="section-note">
+              A working kit for shaping
+              <br />
+              thoughtful digital experiences.
+            </p>
+          </div>
+
+          <div
+            id="skills-loadout"
+            class="skills-loadout"
+          ></div>
+        </section>
+
+        <section
+          id="projects-section"
+          data-testid="projects-section"
+          class="page-section section-wrap projects-section"
+          aria-labelledby="projects-title"
+        >
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow section-index">
+                 <span>— MISSION ARCHIVE</span>
+              </p>
+
+              <h2 id="projects-title">
+                
+                <br />
+                <em>MISSIONS</em>
+              </h2>
+            </div>
+
+            <p class="section-note">
+              A few of the projects
+              <br />
+              One curiosity carried through.
+            </p>
+          </div>
+
+          <div
+            id="project-grid"
+            class="project-grid"
+          ></div>
+        </section>
+
+        <section
+          id="certificates-section"
+          data-testid="certificates-section"
+          class="page-section section-wrap certificates-section"
+          aria-labelledby="certificates-title"
+        >
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow section-index">
+                 <span>— CREDENTIAL ARCHIVE</span>
+              </p>
+
+              <h2 id="certificates-title">
+                PROOF OF
+                <br />
+                <em>THE CRAFT</em>
+              </h2>
+            </div>
+
+            <p class="section-note">
+              A few milestones in the
+              <br />
+              practice of building for the web.
+            </p>
+          </div>
+
+          <div
+            id="certificate-grid"
+            class="certificate-grid"
+            aria-label="Certificates"
+          ></div>
+        </section>
+
+        <section
+          id="profile-section"
+          data-testid="profile-section"
+          class="page-section section-wrap profile-section"
+          aria-labelledby="profile-title"
+        >
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow section-index">
+                 <span>— PERSONNEL FILE</span>
+              </p>
+
+              <h2 id="profile-title">
+                A LITTLE
+                <br />
+                <em>ABOUT ME</em>
+              </h2>
+            </div>
+
+            <p class="section-note">
+              PROFILE //
+              <span id="profile-location-note">
+                CHIRALA, INDIA
+              </span>
+            </p>
+          </div>
+
+          <div class="dossier">
+            <div
+              class="dossier-seal"
+              aria-hidden="true"
+            >
+              <span data-initials>JM</span>
+              <i></i>
+            </div>
+
+            <div
+              class="dossier-fields"
+              id="profile-fields"
+            ></div>
+          </div>
+        </section>
+
+        <section
+          id="journey-section"
+          data-testid="journey-section"
+          class="page-section section-wrap journey-section"
+          aria-labelledby="journey-title"
+        >
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow section-index">
+                 <span>— FIELD NOTES</span>
+              </p>
+
+              <h2 id="journey-title">
+                THE
+                <br />
+                <em>JOURNEY</em>
+              </h2>
+            </div>
+
+            <p class="section-note">
+              Progress is a practice,
+              <br />
+              not a finish line.
+            </p>
+          </div>
+
+          <div
+            class="journey-track"
+            id="journey-track"
+          >
+            <span
+              class="journey-progress"
+              id="journey-progress"
+            ></span>
+
+            <div
+              class="journey-items"
+              id="journey-items"
+            ></div>
+          </div>
+        </section>
+
+        <section
+          id="contact-section"
+          data-testid="contact-section"
+          class="page-section section-wrap contact-section"
+          aria-labelledby="contact-title"
+        >
+          <div
+            class="contact-katana"
+            aria-hidden="true"
+          >
+            <span></span>
+            <i></i>
+            <b></b>
+          </div>
+
+          <div class="contact-heading">
+            <p class="eyebrow section-index">
+               <span>— OPEN CHANNEL</span>
+            </p>
+
+            <h2 id="contact-title">
+              READY FOR
+              <br />
+              <em>THE NEXT MISSION?</em>
+            </h2>
+
+            <p>
+              Have a good idea or a thoughtful challenge?
+              Send a note.
+            </p>
+          </div>
+
+          <div class="contact-layout">
+            <form
+              id="message-form"
+              data-testid="message-form"
+              class="message-form"
+              novalidate
+            >
+              <label for="message-name-input">
+                YOUR NAME
+              </label>
+
+              <input
+                id="message-name-input"
+                data-testid="message-name-input"
+                name="name"
+                type="text"
+                autocomplete="name"
+                maxlength="100"
+                required
+                placeholder="Name"
+              />
+
+              <label for="message-email-input">
+                EMAIL ADDRESS
+              </label>
+
+              <input
+                id="message-email-input"
+                data-testid="message-email-input"
+                name="email"
+                type="email"
+                autocomplete="email"
+                maxlength="254"
+                required
+                placeholder="you@example.com"
+              />
+
+              <label for="message-text-input">
+                MESSAGE
+              </label>
+
+              <textarea
+                id="message-text-input"
+                data-testid="message-text-input"
+                name="message"
+                rows="5"
+                maxlength="4000"
+                required
+                placeholder="Tell me a little about it…"
+              ></textarea>
+
+              <button
+                id="message-submit-button"
+                data-testid="message-submit-button"
+                class="hud-button submit-button"
+                type="submit"
+              >
+                <span>SEND TRANSMISSION</span>
+
+                <span
+                  class="button-arrow"
+                  aria-hidden="true"
+                >
+                  →
+                </span>
+              </button>
+
+              <p
+                id="form-status"
+                class="form-status"
+                role="status"
+                aria-live="polite"
+              ></p>
+            </form>
+
+            <aside
+              class="contact-links"
+              aria-label="Other ways to connect"
+            >
+              <p class="eyebrow">
+                ALTERNATE CHANNELS
+              </p>
+
+              <a
+                id="github-link"
+                data-testid="github-link"
+                aria-disabled="true"
+                tabindex="-1"
+              >
+                GITHUB — https://github.com/Jaswanthcys
+              </a>
+
+              <a
+                id="linkedin-link"
+                data-testid="linkedin-link"
+                aria-disabled="true"
+                tabindex="-1"
+              >
+                LINKEDIN — https://www.linkedin.com/in/jaswanth-marella-7519b4333/
+              </a>
+
+              <a
+                id="email-link"
+                data-testid="email-link"
+                aria-disabled="true"
+                tabindex="-1"
+              >
+                EMAIL — marellajaswanth@gmail.com
+              </a>
+
+              <div class="contact-signoff">
+                <span data-initials>JM</span>
+
+                <p>
+                  THANK YOU FOR
+                  <br />
+                  STOPPING BY.
+                </p>
+              </div>
+            </aside>
+          </div>
+
+          <footer class="site-footer">
+            <span>
+              ©
+              <span id="footer-year"></span>
+              <span id="footer-name">JASWANTH</span>
+            </span>
+
+            <span>
+              MADE WITH INTENTION
+              <i class="status-dot"></i>
+              <span id="footer-location">CHIRLA</span>
+            </span>
+
+            <a href="#hero-section">
+              BACK TO TOP ↑
+            </a>
+          </footer>
+        </section>
+      </main>
+
+      <dialog
+        id="certificate-dialog"
+        class="certificate-dialog"
+        aria-labelledby="certificate-dialog-title"
+      >
+        <div class="certificate-dialog-inner">
+          <div class="certificate-dialog-topline">
+            <p class="eyebrow">
+              CREDENTIAL //
+              <span id="certificate-dialog-number">
+                
+              </span>
+            </p>
+
+            <button
+              class="certificate-close"
+              type="button"
+              data-certificate-close
+              aria-label="Close certificate viewer"
+            >
+              CLOSE
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+
+          <div class="certificate-preview-frame">
+            <img
+              id="certificate-dialog-image"
+              alt=""
+            />
+          </div>
+
+          <div class="certificate-dialog-meta">
+            <div>
+              <h2 id="certificate-dialog-title"></h2>
+              <p id="certificate-dialog-issuer"></p>
+            </div>
+
+            <time id="certificate-dialog-date"></time>
+          </div>
+
+          <a
+            id="certificate-dialog-verification-link"
+            class="certificate-verification-link"
+            target="_blank"
+            rel="noopener noreferrer"
+            hidden
+          >
+            VERIFY CREDENTIAL ↗
+          </a>
+        </div>
+      </dialog>
+
+      <dialog
+        id="project-dialog"
+        class="project-dialog"
+        aria-labelledby="project-dialog-title"
+        aria-describedby="project-dialog-description"
+      >
+        <div class="project-dialog-inner">
+          <div class="project-dialog-topline">
+            <p class="eyebrow">
+              CLASSIFIED FILE //
+              <span id="project-dialog-number">
+                
+              </span>
+            </p>
+
+            <button
+              class="certificate-close"
+              type="button"
+              data-project-close
+              aria-label="Close project detail"
+            >
+              CLOSE
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+
+          <p class="project-dialog-kicker eyebrow">
+            PROJECT MATTER
+          </p>
+
+          <h2 id="project-dialog-title"></h2>
+
+          <p
+            id="project-dialog-description"
+            class="project-dialog-description"
+          ></p>
+
+          <div class="project-dialog-tech-block">
+            <p class="eyebrow">
+              TECHNOLOGY
+            </p>
+
+            <div
+              id="project-dialog-technologies"
+              class="project-tech project-dialog-technologies"
+            ></div>
+          </div>
+
+          <div
+            class="project-dialog-actions"
+            aria-label="Project links"
+          >
+            <a
+              id="project-dialog-live-link"
+              class="project-dialog-action"
+              target="_blank"
+              rel="noopener noreferrer"
+              hidden
+            >
+              OPEN LIVE DEMO
+              <span aria-hidden="true">↗</span>
+            </a>
+
+            <span
+              id="project-dialog-live-unavailable"
+              class="project-dialog-status"
+              aria-disabled="true"
+            >
+              LIVE DEMO NOT AVAILABLE
+            </span>
+
+            <a
+              id="project-dialog-github-link"
+              class="project-dialog-action"
+              target="_blank"
+              rel="noopener noreferrer"
+              hidden
+            >
+              VIEW ON GITHUB
+              <span aria-hidden="true">↗</span>
+            </a>
+
+            <span
+              id="project-dialog-github-unavailable"
+              class="project-dialog-status"
+              aria-disabled="true"
+            >
+              GITHUB LINK TO BE ADDED
+            </span>
+          </div>
+        </div>
+      </dialog>
+    </div>
+
+    <div
+      id="custom-cursor"
+      class="custom-cursor"
+      aria-hidden="true"
+    >
+      <span class="cursor-core"></span>
+      <span class="cursor-ring"></span>
+    </div>
+
+    <!-- DEVELOPMENT AUTO-REFRESH -->
+    <script>
+      (() => {
+        let lastVersion = null;
+        let checking = false;
+
+        async function checkForChanges() {
+          if (checking || document.hidden) return;
+
+          checking = true;
+
+          try {
+            const response = await fetch("/__dev_version", {
+              cache: "no-store",
+            });
+
+            if (!response.ok) return;
+
+            const data = await response.json();
+
+            if (lastVersion === null) {
+              lastVersion = data.version;
+            } else if (data.version !== lastVersion) {
+              window.location.reload();
+              return;
+            }
+          } catch (_) {
+            // Ignore temporary connection errors while the server reloads.
+          } finally {
+            checking = false;
+          }
+        }
+
+        setInterval(checkForChanges, 700);
+        checkForChanges();
+      })();
+    </script>
+  </body>
+</html>
